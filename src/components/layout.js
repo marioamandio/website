@@ -6,47 +6,82 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
+import { StaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 import Header from "./header"
-import "./layout.css"
+import "semantic-ui-less/semantic.less"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
+import { THEME_COLOR } from "../utils/globals"
+
+const StyledLayout = styled.main`
+  margin: 0 auto;
+  padding: 0;
+  background-color: ${THEME_COLOR};
+`
+
+const StyledPage = styled.div`
+  &&&&&&&&&& {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+`
+
+const graphQL = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
       }
     }
-  `)
+  }
+`
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
-}
+export const StateContext = React.createContext({
+  showProfile: false,
+  toggleShowProfile: null,
+})
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+class Layout extends React.Component {
+  state = {
+    showProfile: false,
+    scrolled: false,
+    toggleShowProfile: this.setProfile.bind(this),
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScrollToElement)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScrollToElement)
+  }
+
+  handleScrollToElement = event =>
+    this.setState({ scrolled: window.scrollY > 50 ? true : false })
+
+  setProfile(bool) {
+    this.setState({ showProfile: bool })
+  }
+
+  render() {
+    return (
+      <StaticQuery
+        query={graphQL}
+        render={data => (
+          <StyledPage>
+            <StateContext.Provider value={this.state}>
+              <Header
+                scrolled={this.state.scrolled}
+                siteTitle={data.site.siteMetadata.title}
+              />
+              <StyledLayout>{this.props.children}</StyledLayout>
+            </StateContext.Provider>
+          </StyledPage>
+        )}
+      />
+    )
+  }
 }
 
 export default Layout
