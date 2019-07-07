@@ -1,6 +1,6 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby"
+
 import styled from "styled-components"
 import { Grid } from "semantic-ui-react"
 
