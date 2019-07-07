@@ -62,13 +62,14 @@ const StyledProfileLink = styled.div`
     color: ${props => (props.scrolled ? "black" : "white")};
 
     @media (max-width: 599px) {
-      writing-mode: vertical-rl;
-      -webkit-writing-mode: vertical-rl;
+      -webkit-writing-mode: vertical-lr;
+      writing-mode: vertical-lr;
+
       text-orientation: upright;
       font-size: 1.2rem;
       background: ${BACKGROUND_COLOR};
       color: black;
-      padding: 1rem;
+      padding: 1rem 1.5rem 0.4rem 1rem;
       letter-spacing: 0;
     }
   }
