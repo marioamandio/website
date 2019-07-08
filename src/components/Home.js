@@ -98,9 +98,9 @@ const Home = () => (
                 100% 0,
                 100% 90vh,
                 50% 100%,
-                0 92vh
+                0 90vh
               );
-              clip-path: polygon(0 0, 100% 0, 100% 90vh, 50% 100%, 0 92vh);
+              clip-path: polygon(0 0, 100% 0, 100% 90vh, 50% 100%, 0 90vh);
             `}
           />
           <StyledMainHeader>
