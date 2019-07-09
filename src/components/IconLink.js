@@ -19,7 +19,7 @@ const IconComponent = ({ link, name, iconName }) => (
     key={name}
     size="huge"
     inverted
-    offset="0, 10px"
+    offset="0, 9px"
     position="bottom center"
     trigger={
       <IconLink rel="noopener noreferrer" href={link} target="_blank">
