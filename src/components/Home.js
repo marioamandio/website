@@ -87,9 +87,7 @@ const Home = () => (
       const imageData = data.desktop.childImageSharp.fluid
       return (
         <StyledIndexPage>
-          <BackgroundImage
-            Tag="section"
-            fluid={imageData}
+          <div
             css={css`
               width: 100%;
               height: 100%;
@@ -102,7 +100,24 @@ const Home = () => (
               );
               clip-path: polygon(0 0, 100% 0, 100% 90vh, 50% 100%, 0 90vh);
             `}
-          />
+          >
+            <div
+              css={css`
+                width: 100%;
+                height: 100%;
+                position: fixed;
+              `}
+            >
+              <BackgroundImage
+                Tag="section"
+                fluid={imageData}
+                css={css`
+                  width: 100%;
+                  height: 100%;
+                `}
+              />
+            </div>
+          </div>
           <StyledMainHeader>
             <StyledMainHeaderItem
               css={css`
