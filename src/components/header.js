@@ -13,7 +13,6 @@ const StyledHeader = styled.div`
   color: ${props => (props.scrolled ? "black" : "white")};
   background: ${props => (props.scrolled ? BACKGROUND_COLOR : "transparent")};
   height: 12rem;
-
   color: white;
   line-height: 1.5;
   width: 100%;
